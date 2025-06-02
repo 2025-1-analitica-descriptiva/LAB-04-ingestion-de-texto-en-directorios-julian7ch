@@ -4,9 +4,23 @@
 """
 Escriba el codigo que ejecute la accion solicitada en cada pregunta.
 """
+import zipfile
+import os
 
-
+from homework.generar_csv_desde_directorio import generar_csv_desde_directorio
 def pregunta_01():
+    if not os.path.exists('input/'):
+        with zipfile.ZipFile('files/input.zip', 'r') as zip_ref:
+            zip_ref.extractall('')
+            print("Archivos extraídos.")
+    else:
+        print("Ya existe la carpta. No se descomprime nuevamente.")
+    
+    print(os.listdir('input/'))
+
+    generar_csv_desde_directorio('input/train', 'files/output/train_dataset.csv')
+    generar_csv_desde_directorio('input/test', 'files/output/test_dataset.csv')
+
     """
     La información requerida para este laboratio esta almacenada en el
     archivo "files/input.zip" ubicado en la carpeta raíz.
@@ -47,7 +61,7 @@ def pregunta_01():
 
     A partir de esta informacion escriba el código que permita generar
     dos archivos llamados "train_dataset.csv" y "test_dataset.csv". Estos
-    archivos deben estar ubicados en la carpeta "output" ubicada en la raiz
+    archivos deben estar ubicados en la carpeta "files/output" ubicada en la raiz
     del repositorio.
 
     Estos archivos deben tener la siguiente estructura:
@@ -71,3 +85,4 @@ def pregunta_01():
 
 
     """
+pregunta_01()
